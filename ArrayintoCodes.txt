@@ -1,0 +1,83 @@
+import java.util.Arrays;
+class Main
+{
+    public static boolean isPrime(int n)
+    {
+        if (n <= 1) return false;
+        for (int i = 2; i * i <= n; i++) 
+        {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+    public  static int singleDigitSum(int n)
+    {
+        while (n >= 10) 
+        {
+            int sum = 0;
+            while (n > 0) 
+            {
+                sum += n % 10;
+                n /= 10;
+            }
+            n = sum;
+        }
+        return n;
+    }
+    public static String[] Solution(int[] input1) 
+    {
+        String[] result = new String[input1.length];
+        for (int i = 0; i < input1.length; i++) 
+        {
+            int n = input1[i];
+            String answer = "";
+            if (String.valueOf(n).length() == 6) 
+            {
+                answer += "C";
+            } 
+            else 
+            {
+                answer += "W";
+            }
+            if (n == 0)
+            {
+                answer += "Z";
+            } 
+            else if (n == 1) 
+            {
+                answer += "O";
+            } 
+            else if (isPrime(n))
+            {
+                answer += "P";
+            } 
+            else 
+            {
+                answer += "N";
+            }
+            answer += singleDigitSum(n);
+
+            if (n % 2 == 0) 
+            {
+                answer += n / 2;
+            } 
+            else 
+            {
+                answer += (n - 1) / 2;
+            }
+            result[i] = answer;
+        }
+        
+        return result;
+    }
+    public static void main(String[] args)
+    {
+        
+        int[] input1 = {12,123456,1234567};
+
+        String[] output = Solution(input1);
+
+        System.out.println(Arrays.toString(output));
+        
+    }
+}
